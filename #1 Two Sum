@@ -1,0 +1,13 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        
+        for(int i = 0; i < nums.length; i++){
+            for(int a = i+1; a < nums.length; a++){
+                if (nums[i]+nums[a]==target){
+                    return new int[]{i, a};
+                }
+            }
+        }
+        throw new IllegalArgumentException("no solution");
+    }
+}
