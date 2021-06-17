@@ -1,0 +1,18 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int result = 0;
+
+        LinkedList<Character> sub = new LinkedList<>();
+
+        for (int i = 0; i < s.length(); i++) {
+          char curr = s.charAt(i);
+
+          sub.subList(0, sub.indexOf(curr) + 1).clear();
+          sub.add(curr);
+            
+          result = Math.max(result, sub.size());
+        }
+
+        return result;
+    }
+}
