@@ -1,0 +1,51 @@
+class Solution {
+    
+    private HashMap<Character,String> map;
+    private List<String> result = new ArrayList<>();
+    
+    public List<String> letterCombinations(String digits) { 
+        
+        if( isEmpty(digits) )
+            return result;
+        
+        initHashMap();
+        permutateLettersOnButton(digits, new StringBuilder());
+        return result;
+    }
+    
+    private boolean isEmpty(String digits){
+        if (digits.length() == 0)
+            return true;
+        
+        return false;
+    }
+    
+    private void initHashMap(){
+        this.map = new HashMap<>();
+        map.put('2',"abc");
+        map.put('3',"def");
+        map.put('4',"ghi");
+        map.put('5',"jkl");
+        map.put('6',"mno");
+        map.put('7',"pqrs");
+        map.put('8',"tuv");
+        map.put('9',"wxyz");
+    }
+    
+    void permutateLettersOnButton(String digits, StringBuilder sb){
+        
+        if (sb.length() == digits.length()) {
+            result.add(sb.toString());
+            return;
+        }
+        
+         String button = map.get(digits.charAt(sb.length()));
+        
+         for (int i = 0; i < button.length(); ++i) {
+            sb.append(button.charAt(i));
+            permutateLettersOnButton(digits, sb);
+            sb.setLength(sb.length() - 1);
+        }
+        
+    }
+}
