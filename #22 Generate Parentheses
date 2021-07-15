@@ -1,0 +1,30 @@
+class Solution {
+    List<String> res;
+    public List<String> generateParenthesis(int n) {
+        
+        res= new ArrayList<>();
+        if(n == 0) return res;
+        char[] ch = new char[2*n];
+        generateParenthesis_(0,0,n,0,ch);
+        return res;
+    }
+    
+    public void generateParenthesis_(int OB, int CB, int n, int idx, char[] ch){
+        
+        if(CB == n){
+            res.add(new String(ch));
+            return;
+        }else{
+            
+            if(OB<n){
+                ch[idx] = '(';
+                generateParenthesis_(OB+1, CB, n, idx+1, ch);
+            }
+
+            if(CB<OB){
+                ch[idx] = ')';
+                generateParenthesis_(OB, CB+1, n, idx+1, ch);
+            }
+        }
+    }
+}
