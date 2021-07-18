@@ -1,0 +1,34 @@
+private ListNode reverseListNode(ListNode head, ListNode tail){
+    if(head == tail || head == null) return head;
+    ListNode dummy = new ListNode(-1), p = head, tNext = tail.next;
+    dummy.next = head;
+    while(p.next != null && p.next != tNext){
+        ListNode next = p.next;
+        p.next = next.next;
+        next.next = dummy.next;
+        dummy.next = next;
+        
+    }
+    return dummy.next;
+}
+
+public ListNode reverseKGroup(ListNode head, int k) {
+    if(head == null || head.next == null || k <= 1) return head;
+    ListNode dummy = new ListNode(-1), b = head, e = head, pre = dummy;
+    dummy.next = head;
+    while(e != null){
+        int step = k;
+        while(-- step > 0 && e.next != null){
+            e = e.next;
+        }
+        
+        if(step > 0) break; 
+
+        pre.next = reverseListNode(b, e);
+        while(pre.next != b.next)
+            pre = pre.next;
+        e = b.next;
+        b = b.next;
+    }
+    return dummy.next;
+}
