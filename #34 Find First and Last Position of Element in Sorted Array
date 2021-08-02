@@ -1,0 +1,30 @@
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        if(nums == null || nums.length == 0)
+            return new int[]{-1,-1};
+        int[] answer = new int[2];
+        answer[0] = findPosition(nums, target, 'L');
+        answer[1] = findPosition(nums, target, 'R');
+        return answer;
+    }
+    private int findPosition(int[] nums, int target, char dir){
+        int start = 0;
+        int end = nums.length-1;
+        int pos = -1;
+        while(start <= end){
+            int mid = start + (end-start)/2;
+            if(nums[mid] > target){
+                end = mid-1;
+            }else if(nums[mid] < target){
+                start = mid+1;
+            }else{
+                pos = mid;
+                if(dir == 'L')
+                    end = mid-1;
+                if(dir == 'R')
+                    start = mid+1;
+            }
+        }
+        return pos;
+    }    
+}
